@@ -2,7 +2,7 @@ import styled from "styled-components"
 
 let cor = ""
 
-export default function Movimentacoes({descricao, valor, data, tipo}){
+export default function Movimentacoes({descricao, valor, data, tipo, deletarMovimentacao, id}){
     cor = tipo;
     return (
         <Movimento>
@@ -12,7 +12,7 @@ export default function Movimentacoes({descricao, valor, data, tipo}){
             </div>
             <div>
                 <h5>{Math.abs(`${valor}`).toFixed(2)}</h5>
-                {/*<ion-icon name="close-outline"></ion-icon>*/}
+                <ion-icon onClick={()=> deletarMovimentacao(id)} name="close-outline"></ion-icon>
             </div>
         </Movimento>
     )
@@ -58,5 +58,6 @@ const Movimento = styled.div`
         font-size: 16px;
         line-height: 19px;
         color: #C6C6C6;
+        cursor: pointer;
     }
 `

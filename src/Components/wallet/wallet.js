@@ -21,6 +21,13 @@ export default function Wallet(){
         requisicao.then((res)=> {setData(res.data);});
         requisicao.catch((err)=>alert(err.response.data));
     }
+    function deletarMovimentacao(id){
+        const requisicao = axios.delete(`http://localhost:5000/movimentacoes/${id}`,{
+            headers: {"autorizacao": `${JSON.parse(localStorage.getItem("wallet")).token}`}
+        });
+        requisicao.then(()=> {listarMovimentacoes()});
+        requisicao.catch((err)=>alert(err.response.data));
+    }
 
     function somarBalaco(){
         let aux = 0;
@@ -40,7 +47,7 @@ export default function Wallet(){
 
         <Fundo>
             <Header>
-                <h1>Olá, Fulano</h1>
+                <h1>Olá, {`${JSON.parse(localStorage.getItem("wallet")).nome}`}</h1>
                 <ion-icon name="exit-outline" onClick={()=>{
                     localStorage.clear('wallet');
                     navigate("/");
@@ -54,6 +61,8 @@ export default function Wallet(){
                 data.map((value,index) => 
                 <Movimentacoes 
                 key={index}
+                deletarMovimentacao={deletarMovimentacao}
+                id={value._id}
                 data={value.data} 
                 descricao={value.descricao} 
                 valor={value.valor}

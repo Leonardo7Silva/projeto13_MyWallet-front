@@ -11,7 +11,7 @@ export default function TelaDeSaida(){
     const [valor, setValor] = useState("");
 
     function cadastrarEntrada(e){
-        console.log(valor);
+
         e.preventDefault();
         if(valor.includes(",") || valor.includes("-")){
             return alert('Insira um valor positivo' )
